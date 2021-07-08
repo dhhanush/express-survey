@@ -6,7 +6,6 @@ const endpointSecret = keys.stripeWebhookKey;
 
 module.exports = (app) => {
   app.post('/api/stripe', async (req, res) => {
-    console.log(req.body);
     const charge = await stripe.paymentIntents.create({
       amount: 500,
       currency: 'USD',
@@ -33,8 +32,6 @@ module.exports = (app) => {
       },
     });
 
-    console.log(req.user);
-
     try {
       const session = await stripe.checkout.sessions.create({
         success_url: `http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}`,
@@ -54,7 +51,6 @@ module.exports = (app) => {
 
   app.get('/api/hellodear', (req, res) => {
     res.locals.user = 'Dhanush';
-    console.log(res.locals);
     res.status(200).send(res.locals);
   });
 

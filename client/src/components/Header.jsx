@@ -7,7 +7,6 @@ import Purchase from './Purchase';
 
 export default function Header() {
   const user = useSelector((state) => state.auth);
-  console.log(user);
 
   const renderContent = () => {
     switch (user) {
@@ -39,9 +38,9 @@ export default function Header() {
   return (
     <nav>
       <div className="nav-wrapper">
-        <a href="#" className="brand-logo left">
+        <Link to={user ? '/surveys' : '/'} className="brand-logo left">
           Emailys
-        </a>
+        </Link>
         <ul id="nav-mobile" className="right">
           {renderContent()}
         </ul>

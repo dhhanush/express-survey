@@ -22,7 +22,6 @@ const MyCheckoutForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(email.current.value);
     const { paymentMethod, error } = await stripe.createPaymentMethod({
       type: 'card',
       card: elements.getElement(CardElement),

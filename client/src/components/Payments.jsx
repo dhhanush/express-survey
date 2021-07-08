@@ -6,7 +6,6 @@ const key = import.meta.env.VITE_STRIPE_KEY;
 
 export default function Payments() {
   const dispatch = useDispatch();
-  console.log(key);
   return (
     <StripeCheckout
       name="Emaily"

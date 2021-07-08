@@ -152,7 +152,6 @@ const CheckoutForm = () => {
         },
       },
     });
-    console.log(paymentMethod);
 
     setProcessing(false);
 
@@ -256,7 +255,9 @@ const ELEMENTS_OPTIONS = {
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY);
+const stripePromise = loadStripe(
+  'pk_test_51HVDRhFynJUwAVwEUOS5v7ZLHfkHuo5B528XPWggemGZzBawNHidTpNMNNlwEuVVQv7F8EidvVntOV4hv1AYQRpk00sVbGOzYt'
+);
 
 const Buy = () => {
   return (
