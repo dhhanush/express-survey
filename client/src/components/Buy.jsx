@@ -3,7 +3,6 @@
 // https://www.stripe.com/docs/payments/integration-builder
 
 import React, { useState } from 'react';
-import { loadStripe } from '@stripe/stripe-js';
 import {
   CardElement,
   Elements,
@@ -255,16 +254,11 @@ const ELEMENTS_OPTIONS = {
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
-const stripePromise = loadStripe(
-  'pk_test_51HVDRhFynJUwAVwEUOS5v7ZLHfkHuo5B528XPWggemGZzBawNHidTpNMNNlwEuVVQv7F8EidvVntOV4hv1AYQRpk00sVbGOzYt'
-);
 
 const Buy = () => {
   return (
     <div className="AppWrapper">
-      <Elements stripe={stripePromise || null} options={ELEMENTS_OPTIONS}>
-        <CheckoutForm />
-      </Elements>
+      <CheckoutForm />
     </div>
   );
 };
