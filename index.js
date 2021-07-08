@@ -25,11 +25,16 @@ mongoose.connect(
   }
 );
 
+require('./models/User');
+require('./services/passport');
+require('./routes/authRoutes')(app);
+require('./routes/billingRoutes')(app);
+
 if (process.env.NODE_ENV === 'production') {
   const path = require('path');
   // Express will serve up production assets
   // like our main.js file, or main.css file!
-  app.use(express.static(path.join(__dirname, 'client/dist')));
+  app.use(express.static(path.resolve(__dirname, 'client', 'dist')));
 
   // Express will serve up the index.html file
   // if it doesn't recognize the route
@@ -37,10 +42,5 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
   });
 }
-
-require('./models/User');
-require('./services/passport');
-require('./routes/authRoutes')(app);
-require('./routes/billingRoutes')(app);
 
 const PORT = process.env.PORT || 5000;

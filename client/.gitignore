@@ -5,3 +5,4 @@ dist-ssr
 *.local
 
 Checkout.jsx
+vite.config.js
