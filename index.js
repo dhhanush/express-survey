@@ -25,11 +25,6 @@ mongoose.connect(
   }
 );
 
-require('./models/User');
-require('./services/passport');
-require('./routes/authRoutes')(app);
-require('./routes/billingRoutes')(app);
-
 if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assets
   // like our main.js file, or main.css file!
@@ -42,5 +37,10 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
   });
 }
+
+require('./models/User');
+require('./services/passport');
+require('./routes/authRoutes')(app);
+require('./routes/billingRoutes')(app);
 
 const PORT = process.env.PORT || 5000;
