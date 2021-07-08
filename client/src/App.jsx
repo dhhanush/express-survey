@@ -1,47 +1,39 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchUser } from './actions';
+
+import Header from './components/Header.jsx';
+import Landing from './components/Landing';
+import Success from './components/Success';
+import Failure from './components/Failure';
+import Purchase from './components/Purchase';
+import Buy from './components/Buy';
+const Dashboard = () => <h2>Dashboard</h2>;
+const SurveyNew = () => <h2>SurveyNew</h2>;
 
 function App() {
-  const [count, setCount] = useState(0);
+  const user = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUser());
+  }, [dispatch]);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.jsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-          {' | '}
-          <a className="App-link" href="/auth/google">
-            Google Auth
-          </a>
-        </p>
-      </header>
+    <div className="container">
+      <BrowserRouter>
+        <Header />
+        <Switch>
+          <Route path="/surveys/new" component={SurveyNew} />
+          <Route exact path="/surveys" component={Dashboard} />
+          <Route exact path="/buy" component={Buy} />
+          <Route exact path="/purchase" component={Purchase} />
+          <Route exact path="api/success" component={Success} />
+          <Route exact path="api/failure" component={Failure} />
+          <Route exact path="/" component={Landing} />
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
