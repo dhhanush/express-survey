@@ -262,7 +262,7 @@ const stripePromise = loadStripe(
 const Buy = () => {
   return (
     <div className="AppWrapper">
-      <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
+      <Elements stripe={stripePromise || null} options={ELEMENTS_OPTIONS}>
         <CheckoutForm />
       </Elements>
     </div>

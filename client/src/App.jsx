@@ -28,9 +28,6 @@ function App() {
           <Route path="/surveys/new" component={SurveyNew} />
           <Route exact path="/surveys" component={Dashboard} />
           <Route exact path="/buy" component={Buy} />
-          <Route exact path="/purchase" component={Purchase} />
-          <Route exact path="api/success" component={Success} />
-          <Route exact path="api/failure" component={Failure} />
           <Route exact path="/" component={Landing} />
         </Switch>
       </BrowserRouter>

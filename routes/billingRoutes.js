@@ -1,8 +1,7 @@
 const keys = require('../config/keys');
-const stripe = require('stripe')(keys.stripeSKey);
+const stripe = require('stripe')(`${keys.stripeSKey}`);
 const bodyParser = require('body-parser');
 const requireLogin = require('../middlewares/requireLogin');
-const endpointSecret = keys.stripeWebhookKey;
 
 module.exports = (app) => {
   app.post('/api/stripe', async (req, res) => {
@@ -34,7 +33,7 @@ module.exports = (app) => {
 
     try {
       const session = await stripe.checkout.sessions.create({
-        success_url: `http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}`,
+        success_url: `/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `http://localhost:3000/cancel`,
         payment_method_types: ['card'],
         customer: req.user._id,
