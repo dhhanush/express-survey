@@ -24,12 +24,10 @@ const ELEMENTS_OPTIONS = {
 };
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
-        <App />
-      </Elements>
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
+      <App />
+    </Elements>
+  </Provider>,
   document.getElementById('root')
 );

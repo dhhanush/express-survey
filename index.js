@@ -26,9 +26,12 @@ mongoose.connect(
 );
 
 require('./models/User');
+require('./models/Survey');
+
 require('./services/passport');
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
+require('./routes/surveyRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
   const path = require('path');
