@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const { Path } = require('path-parser');
-const URL = require('url');
+const { URL } = require('url');
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 const requireCredits = require('../middlewares/requireCredits');
@@ -19,23 +19,30 @@ module.exports = (app) => {
     res.send(surveys);
   });
 
-  app.get('/api/surveys/:surveyId/:choice', (req, res) => {
-    res.send('Thanks for voting!');
-  });
+  // app.get('/api/surveys/:surveyId/:choice', (req, res) => {
+  //   res.send('Thanks for voting!');
+  // });
 
   app.post('/api/surveys/webhooks', (req, res) => {
     const p = new Path('/api/surveys/:surveyId/:choice');
 
     _.chain(req.body)
       .map(({ email, url }) => {
-        const match = URL.parse(url, true);
-        if (match) {
-          return { email, surveyId: match.surveyId, choice: match.choice };
+        if (url) {
+          // const match = URL.parse(url, true);
+
+          const match = p.test(new URL(url).pathname);
+
+          if (match) {
+            return { email, surveyId: match.surveyId, choice: match.choice };
+          }
         }
+        return;
       })
       .compact()
       .uniqBy('email', 'surveyId')
       .each(({ surveyId, email, choice }) => {
+        console.log(surveyId, email, choice);
         Survey.updateOne(
           {
             _id: surveyId,

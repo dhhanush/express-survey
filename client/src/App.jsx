@@ -37,11 +37,11 @@ function App() {
             component={Thanks}
           />
           <Route exact path="/buy" component={Buy} />
+          <Route exact path="/api/survey/:hello" component={Thanks} />
           <Route exact path="/" component={Landing} />
         </Switch>
       </BrowserRouter>
     </div>
   );
 }
-
 export default App;
