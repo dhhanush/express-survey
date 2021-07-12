@@ -1,6 +1,6 @@
 const _ = require('lodash');
-const Path = require('path-parser');
-const { URL } = require('url');
+const { Path } = require('path-parser');
+const URL = require('url');
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 const requireCredits = require('../middlewares/requireCredits');
@@ -28,7 +28,7 @@ module.exports = (app) => {
 
     _.chain(req.body)
       .map(({ email, url }) => {
-        const match = p.test(new URL(url).pathname);
+        const match = URL.parse(url, true);
         if (match) {
           return { email, surveyId: match.surveyId, choice: match.choice };
         }
