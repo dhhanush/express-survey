@@ -29,7 +29,10 @@ function App() {
       <BrowserRouter>
         <Header />
         <Switch>
-          <Route path="/surveys/new" component={SurveyNew} />
+          <Route
+            path="/surveys/new"
+            component={user?.credits ? SurveyNew : Buy}
+          />
           <Route exact path="/surveys" component={Dashboard} />
           <Route
             exact
